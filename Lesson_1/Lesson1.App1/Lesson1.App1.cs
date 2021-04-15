@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Algorithms
+namespace Lesson1.App1
 {
-    class Program
+    class Lesson1App1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }
