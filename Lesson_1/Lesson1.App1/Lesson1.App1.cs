@@ -8,7 +8,7 @@ namespace Lesson1.App1
         {
         }
 
-        public static bool IsSimple(int n)
+        public bool IsSimple(int n)
         {
             int d = 0;
             int i = 2;
