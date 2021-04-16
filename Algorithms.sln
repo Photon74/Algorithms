@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1.App2", "Lesson_1\Le
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1.App3", "Lesson_1\Lesson1.App3\Lesson1.App3.csproj", "{72AEF311-FEDE-481D-94FA-7CC69BF37362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_1.Tests", "Lesson_1\Lesson_1.Tests\Lesson_1.Tests.csproj", "{98F65C14-2955-4DA9-8F93-77555A9998EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson1.Tests", "Lesson_1\Lesson_1.Tests\Lesson1.Tests.csproj", "{98F65C14-2955-4DA9-8F93-77555A9998EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
