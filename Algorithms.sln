@@ -5,14 +5,13 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson_1", "Lesson_1", "{C2206DF4-1F22-4BA5-A055-2A1C23F87E1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson1.App1", "Lesson_1\Lesson1.App1\Lesson1.App1.csproj", "{CB5FB546-0529-472C-9876-BCF346E4560C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1.App1", "Lesson_1\Lesson1.App1\Lesson1.App1.csproj", "{CB5FB546-0529-472C-9876-BCF346E4560C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson1.App2", "Lesson_1\Lesson1.App2\Lesson1.App2.csproj", "{0B749DAB-AD28-4700-9BC7-953AAD7FC4AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1.App2", "Lesson_1\Lesson1.App2\Lesson1.App2.csproj", "{0B749DAB-AD28-4700-9BC7-953AAD7FC4AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson1.App3", "Lesson_1\Lesson1.App3\Lesson1.App3.csproj", "{72AEF311-FEDE-481D-94FA-7CC69BF37362}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1.App3", "Lesson_1\Lesson1.App3\Lesson1.App3.csproj", "{72AEF311-FEDE-481D-94FA-7CC69BF37362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson1.Tests", "Lesson_1\Lesson1.Tests\Lesson1.Tests.csproj", "{738CBAE8-9B8C-4392-B49F-04FCF155454A}"
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1.Tests", "Lesson_1\Lesson_1.Tests\Lesson1.Tests.csproj", "{98F65C14-2955-4DA9-8F93-77555A9998EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1.Tests", "Lesson_1\Lesson1.Tests\Lesson1.Tests.csproj", "{738CBAE8-9B8C-4392-B49F-04FCF155454A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson_2", "Lesson_2", "{FF008F28-E4ED-4746-829F-C769F5A6E161}"
 EndProject
