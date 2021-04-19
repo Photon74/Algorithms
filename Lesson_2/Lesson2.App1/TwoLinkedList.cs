@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Lesson2.App1
 {
-    class TwoLinkedList : Node, ILinkedList
+    public class TwoLinkedList : ILinkedList
     {
         public int Count { get; set; }
-        public TwoLinkedList Head { get; set; }
-        public TwoLinkedList Tail { get; set; }
+        public Node Head { get; set; }
+        public Node Tail { get; set; }
 
         public void AddNode(int value)
         {
-            TwoLinkedList node = new TwoLinkedList { Value = value };
+            Node node = new Node { Value = value };
             if (Head == null)
             {
                 Head = node;
@@ -34,7 +34,7 @@ namespace Lesson2.App1
             }
             else
             {
-                TwoLinkedList newNode = new TwoLinkedList { Value = value };
+                Node newNode = new Node { Value = value };
                 newNode.NextNode = node.NextNode;
                 newNode.PrevNode = node.NextNode.PrevNode;
                 node.NextNode.PrevNode = newNode;
@@ -45,7 +45,7 @@ namespace Lesson2.App1
 
         public Node FindNode(int searchValue)
         {
-            TwoLinkedList currentNode = Head;
+            Node currentNode = Head;
             while (currentNode != null)
             {
                 if (currentNode.Value == searchValue)
@@ -65,7 +65,7 @@ namespace Lesson2.App1
         public void RemoveNode(int index)
         {
             int currentIndex = 0;
-            TwoLinkedList currentNode = new TwoLinkedList();
+            Node currentNode = Head;
             while (currentNode != null)
             {
                 if (currentIndex == index)

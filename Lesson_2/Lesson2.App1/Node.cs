@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Lesson2.App1
 {
-    class Node
+    public class Node
     {
         public int Value { get; set; }
-        public TwoLinkedList NextNode { get; set; }
-        public TwoLinkedList PrevNode { get; set; }
+        public Node NextNode { get; set; }
+        public Node PrevNode { get; set; }
     }
 }
