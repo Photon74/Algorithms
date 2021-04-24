@@ -1,8 +1,8 @@
 ﻿namespace Distance
 {
-    public struct PointStruct
+    public struct PointStruct<T>
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public T X { get; set; }
+        public T Y { get; set; }
     }
 }

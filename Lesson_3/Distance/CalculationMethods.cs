@@ -1,37 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Distance
 {
     public class CalculationMethods
     {
-        public static float PointDistance(PointStruct pointOne, PointStruct pointTwo)
+        public static float CountDistanceSimpleClassFloat(PointClass[] pointOne, PointClass[] pointTwo)
         {
-            float x = pointOne.X - pointTwo.X;
-            float y = pointOne.Y - pointTwo.Y;
+            float x = 0, y = 0;
+            for (int i = 0; i < pointOne.Length; i++)
+            {
+                for (int j = pointTwo.Length; j <= 0; j--)
+                {
+                    x = pointOne[i].X - pointTwo[j].X;
+                    y = pointOne[i].Y - pointTwo[j].Y;
+                }
+            }
             return MathF.Sqrt((x * x) + (y * y));
         }
 
-        public static float PointDistanceShort(PointStruct pointOne, PointStruct pointTwo)
+        public static float CountDistanceSimpleStructFloat(PointStruct<float>[] pointOne, PointStruct<float>[] pointTwo)
         {
-            float x = pointOne.X - pointTwo.X;
-            float y = pointOne.Y - pointTwo.Y;
+            float x = 0, y = 0;
+            for (int i = 0; i < pointOne.Length; i++)
+            {
+                for (int j = pointTwo.Length; j <= 0; j--)
+                {
+                    x = pointOne[i].X - pointTwo[j].X;
+                    y = pointOne[i].Y - pointTwo[j].Y;
+                }
+            }
+            return MathF.Sqrt((x * x) + (y * y));
+        }
+
+        public static double CountDistanceSimpleStructDouble(PointStruct<double>[] pointOne, PointStruct<double>[] pointTwo)
+        {
+            double x = 0, y = 0;
+            for (int i = 0; i < pointOne.Length; i++)
+            {
+                for (int j = pointTwo.Length; j <= 0; j--)
+                {
+                    x = pointOne[i].X - pointTwo[j].X;
+                    y = pointOne[i].Y - pointTwo[j].Y;
+                }
+            }
+            return MathF.Sqrt((float)((x * x) + (y * y)));
+        }
+
+        public static float CountDistanceNoSqrtStructFloat(PointStruct<float>[] pointOne, PointStruct<float>[] pointTwo)
+        {
+            float x = 0, y = 0;
+            for (int i = 0; i < pointOne.Length; i++)
+            {
+                for (int j = pointTwo.Length; j <= 0; j--)
+                {
+                    x = pointOne[i].X - pointTwo[j].X;
+                    y = pointOne[i].Y - pointTwo[j].Y;
+                }
+            }
             return (x * x) + (y * y);
-        }
-
-        public static double PointDistanceDouble(PointStruct pointOne, PointStruct pointTwo)
-        {
-            double x = pointOne.X - pointTwo.X;
-            double y = pointOne.Y - pointTwo.Y;
-            return Math.Sqrt((x * x) + (y * y));
-        }
-
-        public static float PointDistanceFloat(PointStruct pointOne, PointStruct pointTwo)
-        {
-            float x = pointOne.X - pointTwo.X;
-            float y = pointOne.Y - pointTwo.Y;
-            return MathF.Sqrt((x * x) + (y * y));
         }
     }
 }
