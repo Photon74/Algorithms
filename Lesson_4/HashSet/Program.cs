@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HashSet
 {
     class Program
     {
-        
+        static int wordsNumber = 10_000;
+
+        string[] wordsArr = new string[wordsNumber];
+        HashSet<string> wordsHash = new HashSet<string>();
+
         void GenerateWords()
-        {
-            int wordsNumber = 10_000;
+        {            
             int lettersInWord = 5;
             char[] letters = "QWERTASDFGZXCVBYUIOPHJKLNMqwertasdfgzxcvbyuiophjklnm".ToCharArray();
 
@@ -22,9 +26,12 @@ namespace HashSet
 
                     word += letters[LetterIndex];
                 }
-                 
+                wordsArr[i] = word;
+                wordsHash.Add(word);
             }
         }
+
+
         static void Main(string[] args)
         {
 
