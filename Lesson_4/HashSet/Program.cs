@@ -1,49 +1,61 @@
-﻿using System;
+﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace HashSet
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
-        {
-
-        }
         static int wordsNumber = 10_000;
 
-        string[] wordsArr = new string[wordsNumber];
-        HashSet<string> wordsHash = new HashSet<string>();
+        public static string[] wordsArr = new string[wordsNumber];
+        public static HashSet<string> wordsHash = new HashSet<string>();
+        static void Main(string[] args)
+        {
+            for (int i = 0; i < wordsNumber; i++)
+            {
+                wordsArr[i] = GenerateWord();
+                wordsHash.Add(GenerateWord());
+            }
+            
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+        }
 
-        void GenerateWords()
+        public class BechmarkClass
+        {
+            string str = GenerateWord();
+
+            [Benchmark]
+            public bool TestSearchInArray()
+            {
+                return wordsArr.Any(n => n == str);
+            }
+
+            [Benchmark]
+            public bool TestSearchInHashSet()
+            {
+                return wordsHash.Contains(str);
+            }
+        }        
+
+
+        public static string GenerateWord()
         {
             int lettersInWord = 5;
             char[] letters = "QWERTASDFGZXCVBYUIOPHJKLNMqwertasdfgzxcvbyuiophjklnm".ToCharArray();
 
             Random random = new Random();
 
-            for (int i = 1; i <= wordsNumber; i++)
+            string word = "";
+            for (int j = 1; j < lettersInWord; j++)
             {
-                string word = "";
-                for (int j = 1; j < lettersInWord; j++)
-                {
-                    int LetterIndex = random.Next(0, letters.Length);
+                int LetterIndex = random.Next(0, letters.Length);
 
-                    word += letters[LetterIndex];
-                }
-                wordsArr[i] = word;
-                wordsHash.Add(word);
+                word += letters[LetterIndex];
             }
-        }
-
-        bool IsArrayContains(string str)
-        {
-            return wordsArr.Any(n => n == str);
-        }
-
-        bool IsHashSetContains(string str)
-        {
-            return wordsHash.Contains(str);
+            return word;
         }
     }
 }
