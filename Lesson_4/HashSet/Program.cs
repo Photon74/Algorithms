@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HashSet
 {
     class Program
     {
+        static void Main(string[] args)
+        {
+
+        }
         static int wordsNumber = 10_000;
 
         string[] wordsArr = new string[wordsNumber];
         HashSet<string> wordsHash = new HashSet<string>();
 
         void GenerateWords()
-        {            
+        {
             int lettersInWord = 5;
             char[] letters = "QWERTASDFGZXCVBYUIOPHJKLNMqwertasdfgzxcvbyuiophjklnm".ToCharArray();
 
@@ -31,10 +36,14 @@ namespace HashSet
             }
         }
 
-
-        static void Main(string[] args)
+        bool IsArrayContains(string str)
         {
+            return wordsArr.Any(n => n == str);
+        }
 
+        bool IsHashSetContains(string str)
+        {
+            return wordsHash.Contains(str);
         }
     }
 }
