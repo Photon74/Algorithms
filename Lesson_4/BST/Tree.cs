@@ -9,45 +9,59 @@ namespace BST
         public Node Root { get; private set; }        
         public int Count { get; private set; }
 
+        public Tree()
+        {
+            Root = null;
+        }
+
         public void AddItem(int value)
         {            
-            var node = new Node { Value = value };
             if (Root == null)
             {
-                Root = node;
+                Root = new Node(value);
                 Count++;
                 return;
             }
-            
-            var current = Root;
-            while (current != null)
+            else
             {
-                if (current.Value < node.Value)
+                var currentNode = Root;
+                AddNode(currentNode, value);
+            }
+
+        }
+
+        private void AddNode(Node node, int value)
+        {
+            var newNode = new Node(value);
+            while (node != null)
+            {
+                if (value > node.Value)
                 {
-                    if (current.Left == null)
+                    if (node.Right != null)
                     {
-                        current.Left = node;
+                        node = node.Right;
                     }
                     else
                     {
-                        current = current.Left;
-                        AddItem(value);
+                        newNode.Parent = node;
+                        node.Right = newNode;
+                        break;
                     }
                 }
                 else
                 {
-                    if (current.Right == null)
+                    if (node.Left != null)
                     {
-                        current.Right = node;
+                        node = node.Left;
                     }
                     else
                     {
-                        current = current.Right;
-                        AddItem(value);
+                        newNode.Parent = node;
+                        node.Left = newNode;
+                        break;
                     }
                 }
             }
-            Count++;
         }
 
         public Node GetNodeByValue(int value)
@@ -57,7 +71,7 @@ namespace BST
 
         public Node GetRoot()
         {
-            throw new NotImplementedException();
+            return Root;
         }
 
         public void PrintTree()
@@ -66,6 +80,89 @@ namespace BST
         }
 
         public void RemoveItem(int value)
+        {
+            var nodeToDelete = GetNodeByValue(value);
+            var p = nodeToDelete.Parent;
+            if (nodeToDelete.Left == null && nodeToDelete.Right == null)
+            {
+                if (p.Left == nodeToDelete)
+                {
+                    p.Left = null;
+                }
+                if (p.Right == nodeToDelete)
+                {
+                    p.Right = null;
+                }
+            }
+            else if (nodeToDelete.Left == null || nodeToDelete.Right == null)
+            {
+                if (nodeToDelete.Left == null)
+                {
+                    if (p.Left == nodeToDelete)
+                    {
+                        p.Left = nodeToDelete.Right;
+                    }
+                    else
+                    {
+                        p.Right = nodeToDelete.Right;
+                    }
+                    nodeToDelete.Right.Parent = p;
+                }
+                else
+                {
+                    if (p.Left == nodeToDelete)
+                    {
+                        p.Left = nodeToDelete.Left;
+                    }
+                    else
+                    {
+                        p.Right = nodeToDelete.Left;
+                    }
+                    nodeToDelete.Left.Parent = p;
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        private Node Next(Node node)
+        {
+            if (node.Right != null)
+            {
+                return Minimum(node.Right);
+            }
+            var y = node.Parent;
+            while (y != null && node == y.Right)
+            {
+                node = y;
+                y = y.Parent;
+            }
+            return y;
+        }
+
+        private Node Previous(Node node)
+        {
+            if (node.Left != null)
+            {
+                return Maximum(node.Left);
+            }
+            var y = node.Parent;
+            while (y != null && node == y.Left)
+            {
+                node = y;
+                y = y.Parent;
+            }
+            return y;
+        }
+
+        private Node Maximum(Node left)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Node Minimum(Node right)
         {
             throw new NotImplementedException();
         }
