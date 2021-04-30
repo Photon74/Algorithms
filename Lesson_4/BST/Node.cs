@@ -16,7 +16,7 @@ namespace BST
 
         public override bool Equals(object obj)
         {
-            var node = obj as Node;
+            Node node = obj as Node;
 
             if (node == null)
                 return false;

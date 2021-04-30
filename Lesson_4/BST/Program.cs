@@ -14,6 +14,13 @@
             tree.AddItem(11);
             tree.AddItem(3);
             tree.AddItem(4);
+            tree.AddItem(8);
+            tree.AddItem(1);
+            tree.AddItem(5);
+            tree.AddItem(2);
+            tree.AddItem(13);
+
+            tree.PrintTree();
         }
     }
 }
