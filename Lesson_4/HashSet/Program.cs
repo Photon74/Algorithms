@@ -16,8 +16,8 @@ namespace HashSet
         {
             for (int i = 0; i < wordsNumber; i++)
             {
-                wordsArr[i] = GenerateWord();
-                wordsHash.Add(GenerateWord());
+                wordsArr[i] = GenerateWord(lettersInWord: 5);
+                wordsHash.Add(GenerateWord(lettersInWord: 5));
             }
             
             BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
@@ -25,25 +25,24 @@ namespace HashSet
 
         public class BechmarkClass
         {
-            string str = GenerateWord();
+            string stringForSearching = GenerateWord(lettersInWord: 5);
 
             [Benchmark]
             public bool TestSearchInArray()
             {
-                return wordsArr.Any(n => n == str);
+                return wordsArr.Any(n => n == stringForSearching);
             }
 
             [Benchmark]
             public bool TestSearchInHashSet()
             {
-                return wordsHash.Contains(str);
+                return wordsHash.Contains(stringForSearching);
             }
         }        
 
 
-        public static string GenerateWord()
+        public static string GenerateWord(int lettersInWord)
         {
-            int lettersInWord = 5;
             char[] letters = "QWERTASDFGZXCVBYUIOPHJKLNMqwertasdfgzxcvbyuiophjklnm".ToCharArray();
 
             Random random = new Random();

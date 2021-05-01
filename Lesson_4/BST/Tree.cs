@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BST
 {
-    class Tree : ITree
+    public class Tree : ITree
     {
         public Node Root { get; private set; }
         public int Count { get; private set; }
@@ -44,7 +44,6 @@ namespace BST
             foreach (var value in collection)
             {
                 AddItem(value);
-                Count++;
             }
         }
 
@@ -173,13 +172,26 @@ namespace BST
             return false;
         }
 
+        public void Clear()
+        {
+            Root = null;
+            Count = 0;
+        }
+
         public void PrintTree()
         {
             Node node = Root;
-            Console.Write($"        __{ node.Value}__\n       /      \\\n      {node.Left.Value}        {node.Right.Value}\n     / \\      /  \\\n" +
-                $"    {node.Left.Left.Value}   {node.Left.Right.Value}   {node.Right.Left.Value}   {node.Right.Right.Value}\n   /\n" +
-                $"  {node.Left.Left.Left.Value}\n / \\\n{node.Left.Left.Left.Left.Value}   {node.Left.Left.Left.Right.Value}\n" +
-                $" \\   \\\n  {node.Left.Left.Left.Left.Right.Value}   {node.Left.Left.Left.Left.Right.Value}");
+            Console.Write($"        __{ node.Value}__\n" +
+                          $"       /      \\\n" +
+                          $"      {node.Left.Value}        {node.Right.Value}\n" +
+                          $"     / \\      /  \\\n" +
+                          $"    {node.Left.Left.Value}   {node.Left.Right.Value}   {node.Right.Left.Value}   {node.Right.Right.Value}\n" +
+                          $"   /   /        /\n" +
+                          $"  {node.Left.Left.Left.Value}   {node.Left.Right.Left.Value}        {node.Right.Right.Left.Value}\n" +
+                          $" / \\\n" +
+                          $"{node.Left.Left.Left.Left.Value}   {node.Left.Left.Left.Right.Value}\n" +
+                          $" \\   \\\n" +
+                          $"  {node.Left.Left.Left.Left.Right.Value}   {node.Left.Left.Left.Left.Right.Value}");
         }
 
         public bool Contains(int value)
@@ -281,35 +293,5 @@ namespace BST
                 _ => null,
             };
         }
-
-        //private Node Next(Node node)
-        //{
-        //    if (node.Right != null)
-        //    {
-        //        return FindMinimum(node.Right);
-        //    }
-        //    var y = node.Parent;
-        //    while (y != null && node == y.Right)
-        //    {
-        //        node = y;
-        //        y = y.Parent;
-        //    }
-        //    return y;
-        //}
-
-        //private Node Previous(Node node)
-        //{
-        //    if (node.Left != null)
-        //    {
-        //        return FindMaximum(node.Left);
-        //    }
-        //    var y = node.Parent;
-        //    while (y != null && node == y.Left)
-        //    {
-        //        node = y;
-        //        y = y.Parent;
-        //    }
-        //    return y;
-        //}
     }
 }
