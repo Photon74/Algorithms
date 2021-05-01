@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +6,7 @@ namespace BST
 {
     class Tree : ITree
     {
-        public Node Root { get; private set; }        
+        public Node Root { get; private set; }
         public int Count { get; private set; }
 
         public Tree()
@@ -25,7 +24,7 @@ namespace BST
         }
 
         public void AddItem(int value)
-        {            
+        {
             if (Root == null)
             {
                 Root = new Node(value);
@@ -47,7 +46,7 @@ namespace BST
                 AddItem(value);
                 Count++;
             }
-        }        
+        }
 
         public Node GetNodeByValue(int value)
         {
@@ -168,40 +167,19 @@ namespace BST
             Count--;
         }
         
-        public void Clear()
-        {
-            Root = null;
-            Count = 0;
-        }
-
-        public void PrintTree() // TODO print tree
-        {
-            Node node = Root;
-            int n = 1;
-            var x = new string(' ', n);
-            StringBuilder sb = new StringBuilder();
-            sb.Append(x + "(" + node.Value + ")" + x);
-            string tmpStr = sb.ToString();
-            PrintTree(node, n);
-
-            Console.Write(sb);
-        }
-
-        private void PrintTree(Node node, int n)
-        {
-            while (node != null)
-            {
-                if (node.Left != null)
-                {
-
-                }
-            }
-        }
-
         public bool IsEmpty(Tree tree)
         {
             if (tree.Root == null) return true;
             return false;
+        }
+
+        public void PrintTree()
+        {
+            Node node = Root;
+            Console.Write($"        __{ node.Value}__\n       /      \\\n      {node.Left.Value}        {node.Right.Value}\n     / \\      /  \\\n" +
+                $"    {node.Left.Left.Value}   {node.Left.Right.Value}   {node.Right.Left.Value}   {node.Right.Right.Value}\n   /\n" +
+                $"  {node.Left.Left.Left.Value}\n / \\\n{node.Left.Left.Left.Left.Value}   {node.Left.Left.Left.Right.Value}\n" +
+                $" \\   \\\n  {node.Left.Left.Left.Left.Right.Value}   {node.Left.Left.Left.Left.Right.Value}");
         }
 
         public bool Contains(int value)
@@ -211,9 +189,11 @@ namespace BST
             {
                 switch (value.CompareTo(currentNode.Value))
                 {
-                    case -1: currentNode = currentNode.Left;
-                        break;                    
-                    case 1: currentNode = currentNode.Right;
+                    case -1:
+                        currentNode = currentNode.Left;
+                        break;
+                    case 1:
+                        currentNode = currentNode.Right;
                         break;
                     default: return true;
                 }

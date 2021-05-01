@@ -1,4 +1,6 @@
-﻿namespace BST
+﻿using System;
+
+namespace BST
 {
     class Program
     {
@@ -21,6 +23,9 @@
             tree.AddItem(13);
 
             tree.PrintTree();
+
+
+            Console.ReadLine();
         }
     }
 }
