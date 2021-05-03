@@ -26,7 +26,9 @@ namespace BFS
             tree.AddItem(13);
 
             BFS(100);
+
             Console.WriteLine("\n");
+
             DFS(100);
 
             Console.ReadLine();
