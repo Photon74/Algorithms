@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graf", "Lesson_6\Graf\Graf.csproj", "{6C20A2EB-D8D7-415A-B3ED-B3DF6C5FA471}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graf", "Lesson_6\Graf\Graf.csproj", "{6C20A2EB-D8D7-415A-B3ED-B3DF6C5FA471}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson_6", "Lesson_6", "{16B888D5-ABB1-4B83-9529-BB13A310CCF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +20,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C20A2EB-D8D7-415A-B3ED-B3DF6C5FA471} = {16B888D5-ABB1-4B83-9529-BB13A310CCF7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5E949C20-C41C-42B4-AB77-15A740C10FAD}

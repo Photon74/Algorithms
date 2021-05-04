@@ -9,7 +9,7 @@ namespace Graf
         public int Value { get; set; }
         public List<Edge> Edges { get; set; }
 
-        public Node(int value) // Создать вершину
+        public Node(int value) // Создать узел(вершину)
         {
             Value = value;
             Edges = new List<Edge>();
