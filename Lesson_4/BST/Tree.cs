@@ -77,9 +77,7 @@ namespace BST
                 int tmp = currentNode.Value;
                 RemoveItem(tmp);
                 node.Value = tmp;
-
-                // Count--;
-                // return;
+                return;
             }
 
             if (node.Left == null && node.Right == null) // удаление листьев
@@ -87,8 +85,6 @@ namespace BST
                 if (node.Parent.Left == node) node.Parent.Left = null;
 
                 if (node.Parent.Right == node) node.Parent.Right = null;
-
-                // Count--;
             }
 
             else if (node.Left == null || node.Right == null)

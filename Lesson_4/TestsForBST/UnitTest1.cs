@@ -98,13 +98,26 @@ namespace TestsForBST
             Assert.IsNotNull(node);
         }
 
-        [Test]
-        public void RemoveItem_Test()
+        [TestCase(5, null)]
+        [TestCase(8, null)]
+        [TestCase(11, null)]
+        [TestCase(10, null)]
+        public void RemoveItem_Test(int value, Node expected)
         {
-            tree.RemoveItem(12);
+            tree.RemoveItem(value);
 
-            int actual = tree.GetRoot().Right.Value;
-            int expected = 13;
+            Node actual = tree.GetNodeByValue(value);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Remove_Root_Test()
+        {
+            tree.RemoveItem(10);
+
+            int actual = tree.GetRoot().Value;
+            int expected = 11;
 
             Assert.AreEqual(expected, actual);
         }
