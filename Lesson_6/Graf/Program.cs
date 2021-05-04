@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Algorithms
+namespace Graf
 {
     class Program
     {

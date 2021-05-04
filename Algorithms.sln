@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms", "Algorithms\Algorithms.csproj", "{586A6E76-CD18-45B3-8C0B-9A35BE685762}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graf", "Lesson_6\Graf\Graf.csproj", "{6C20A2EB-D8D7-415A-B3ED-B3DF6C5FA471}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{586A6E76-CD18-45B3-8C0B-9A35BE685762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{586A6E76-CD18-45B3-8C0B-9A35BE685762}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{586A6E76-CD18-45B3-8C0B-9A35BE685762}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{586A6E76-CD18-45B3-8C0B-9A35BE685762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C20A2EB-D8D7-415A-B3ED-B3DF6C5FA471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C20A2EB-D8D7-415A-B3ED-B3DF6C5FA471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C20A2EB-D8D7-415A-B3ED-B3DF6C5FA471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C20A2EB-D8D7-415A-B3ED-B3DF6C5FA471}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
