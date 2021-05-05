@@ -8,6 +8,7 @@ namespace Graf
     {
         public int Value { get; set; }
         public List<Edge> Edges { get; set; }
+        public bool IsVisited { get; set; }
 
         public Node(int value) // Создать узел(вершину)
         {
