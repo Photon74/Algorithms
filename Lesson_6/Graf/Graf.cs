@@ -13,9 +13,23 @@ namespace Graf
             Nodes = new List<Node>();
         }
 
+        public Graf(IEnumerable<int> collection)
+        {
+            Nodes = new List<Node>();
+            AddNodeRange(collection);
+        }
+
         public void AddNode(int nodeValue)
         {
             Nodes.Add(new Node(nodeValue));
+        }
+
+        public void AddNodeRange(IEnumerable<int> collection)
+        {
+            foreach (var value in collection)
+            {
+                AddNode(value);
+            }
         }
 
         public Node GetNodeByValue(int nodeValue)
@@ -39,6 +53,15 @@ namespace Graf
                 firstNode.AddEdge(secondNode, weight);
                 secondNode.AddEdge(firstNode, weight);
             }
+        }
+        public override string ToString()
+        {
+            string s = string.Empty;
+            foreach (var node in Nodes)
+            {
+                s += node.ToString() + ", ";
+            }
+            return s;
         }
     }
 }
