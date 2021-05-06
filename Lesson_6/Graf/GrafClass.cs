@@ -4,16 +4,16 @@ using System.Text;
 
 namespace Graf
 {
-    public class Graf
+    public class GrafClass
     {
         public List<Node> Nodes { get; }
 
-        public Graf()
+        public GrafClass()
         {
             Nodes = new List<Node>();
         }
 
-        public Graf(IEnumerable<int> collection)
+        public GrafClass(IEnumerable<int> collection)
         {
             Nodes = new List<Node>();
             AddNodeRange(collection);

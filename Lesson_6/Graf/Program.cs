@@ -10,7 +10,7 @@ namespace Graf
 
         static void Main(string[] args)
         {
-            Graf graf1 = new Graf(); // Первый способ создания графа
+            GrafClass graf1 = new GrafClass(); // Первый способ создания графа
             graf1.AddNode(10);
             graf1.AddNode(7);
             graf1.AddNode(12);
@@ -35,11 +35,11 @@ namespace Graf
 
             // Два других способа создания узлов в графе
             arr = GetRandomIntArray();
-            Graf graf2 = new Graf();
+            GrafClass graf2 = new GrafClass();
             graf2.AddNodeRange(arr);
 
             arr = GetRandomIntArray(15);
-            Graf graf3 = new Graf(arr);
+            GrafClass graf3 = new GrafClass(arr);
 
 
 
