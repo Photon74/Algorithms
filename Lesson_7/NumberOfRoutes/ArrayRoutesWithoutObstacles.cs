@@ -8,7 +8,7 @@ namespace NumberOfRoutes
         public static double CountRoutes(int a, int b)
         {
             i++;
-            if (i % 100_000_000 == 0) Console.WriteLine(i++);
+            if (i % 100_000 == 0) Console.WriteLine($"{i} рекурсивных вызовов");
 
             if (a == 0 || b == 0)
             {
