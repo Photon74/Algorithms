@@ -7,8 +7,8 @@ namespace NumberOfRoutes
         static Random random = new Random();
         static void Main(string[] args)
         {
-            int A = 6;// random.Next(2, 15);
-            int B = 6;// random.Next(2, 15);
+            int A = random.Next(2, 15);
+            int B = random.Next(2, 15);
 
             int result = ArrayRoutesWithoutObstacles.CountRoutes(A - 1, B - 1);
 
