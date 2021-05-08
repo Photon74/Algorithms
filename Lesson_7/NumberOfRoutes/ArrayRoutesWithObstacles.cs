@@ -4,25 +4,25 @@ namespace NumberOfRoutes
 {
     public class ArrayRoutesWithObstacles
     {
-        static public double i = 0;
-        static int[,] c =
+        static public int i = 0;
+        static int[,] obstacles =
         {
-            {1, 1, 1 },
-            {1, 0, 1 },
-            {1, 1, 0 }
+            {1, 1, 1, 1 },
+            {1, 1, 1, 1 },
+            {1, 1, 1, 0 },
+            {1, 0, 0, 1 }
         };
 
-        public static double CountRoutes(int a, int b)
+        public static int CountRoutes(int a, int b)
         {
             i++;
-            if (i % 100_000 == 0) Console.WriteLine($"{i} рекурсивных вызовов");
 
-            if (c[a, b] == 0) return 0;
+            if (!(a > obstacles.GetLength(0) - 1) && !(b > obstacles.GetLength(1) - 1))
+            {
+                if (obstacles[a, b] == 0) return 0; 
+            }
 
-            if (a == 0 || b == 0) return 1;
-
-            return CountRoutes(a, b - 1) + CountRoutes(a - 1, b);
+            return a == 0 || b == 0 ? 1 : CountRoutes(a, b - 1) + CountRoutes(a - 1, b);
         }
-
     }
 }
