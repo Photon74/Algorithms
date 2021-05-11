@@ -51,7 +51,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArrayRoutesTests", "Lesson_
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson_8", "Lesson_8", "{8B7FB083-8AE1-47B8-A6FB-4681D9CCAD97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BucketSort", "Lesson_8\Bucketsort\BucketSort.csproj", "{CD0FF737-88AC-4CC7-B83D-D3653576D347}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BucketSort", "Lesson_8\Bucketsort\BucketSort.csproj", "{CD0FF737-88AC-4CC7-B83D-D3653576D347}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalSorter", "Lesson_8\ExternalSort\ExternalSorter.csproj", "{46EE3E7D-A9FE-4121-AF1A-A056BDDFD7DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +129,10 @@ Global
 		{CD0FF737-88AC-4CC7-B83D-D3653576D347}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD0FF737-88AC-4CC7-B83D-D3653576D347}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD0FF737-88AC-4CC7-B83D-D3653576D347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46EE3E7D-A9FE-4121-AF1A-A056BDDFD7DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46EE3E7D-A9FE-4121-AF1A-A056BDDFD7DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46EE3E7D-A9FE-4121-AF1A-A056BDDFD7DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46EE3E7D-A9FE-4121-AF1A-A056BDDFD7DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -149,6 +155,7 @@ Global
 		{ABC2E2A9-B0C7-41B8-B4AA-3894A0E3B5CB} = {76E8D31E-1E7E-4369-8B3E-EAA1F5BD6FFC}
 		{0E3C5119-3DA8-4A3E-BCD7-CE7AE4CFCDF7} = {76E8D31E-1E7E-4369-8B3E-EAA1F5BD6FFC}
 		{CD0FF737-88AC-4CC7-B83D-D3653576D347} = {8B7FB083-8AE1-47B8-A6FB-4681D9CCAD97}
+		{46EE3E7D-A9FE-4121-AF1A-A056BDDFD7DB} = {8B7FB083-8AE1-47B8-A6FB-4681D9CCAD97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5E949C20-C41C-42B4-AB77-15A740C10FAD}
