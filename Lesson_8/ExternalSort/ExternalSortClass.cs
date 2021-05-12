@@ -7,6 +7,7 @@ namespace ExternalSorter
 {
     public class ExternalSort
     {
+        public static int FlushSize => 256;
         public static List<string> TempFiles { get; private set; }
 
         public static void IntArrayFile(string filePath)
@@ -15,13 +16,14 @@ namespace ExternalSorter
             // разбиение большого файла на малые сортированные файлы
             try
             {
-                using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
+                using (FileStream streamReader = new FileStream(filePath, FileMode.Open))
+                using (BinaryReader reader = new BinaryReader(streamReader))
                 {
                     int count = 0;
-                    while (reader.PeekChar() >= -1)
+                    while (streamReader.Position < streamReader.Length)
                     {
-                        int[] tempArr = new int[(int)FileSize.MByte];
-                        for (int i = 0; i < tempArr.Length - 1; i++)
+                        int[] tempArr = new int[(int)FileSize.KByte];
+                        for (int i = 0; i < tempArr.Length; i++)
                         {
                             tempArr[i] = reader.ReadInt32();
                         }
@@ -30,11 +32,13 @@ namespace ExternalSorter
                         string tempFileName = Path.GetFileNameWithoutExtension(filePath) + count.ToString() + Path.GetExtension(filePath);
                         TempFiles.Add(tempFileName);
 
-                        using (BinaryWriter writer = new BinaryWriter(File.Open(tempFileName, FileMode.OpenOrCreate)))
+                        using (FileStream streamWriter = new FileStream(tempFileName, FileMode.Create))
+                        using (BinaryWriter writer = new BinaryWriter(streamWriter))
                         {
                             for (int i = 0; i < tempArr.Length; i++)
                             {
                                 writer.Write(tempArr[i]);
+                                if (i % FlushSize == 0) writer.Flush();
                             }
                         }
                         count++;
@@ -46,32 +50,33 @@ namespace ExternalSorter
                 Console.WriteLine(e.Message);
             }
 
-            File.Delete(filePath);
+            File.Delete(filePath);  // удаление исходного файла
 
-            // собирание файлов в кучу
+            // собирание временных файлов в один(имя совпадает с исходным)
             try
             {
-                using (BinaryWriter writer = new BinaryWriter(File.Open(filePath, FileMode.OpenOrCreate)))
+                using (FileStream streamWriter = new FileStream(filePath, FileMode.Create))
+                using (BinaryWriter writer = new BinaryWriter(streamWriter))
                 {
                     int minInt = int.MaxValue;
                     int length = TempFiles.Count;
-                    BinaryReader[] binaryReaders = new BinaryReader[length];
+                    FileStream[] streamReader = new FileStream[length];
+                    BinaryReader[] reader = new BinaryReader[length];
                     int[] tempIntArr = new int[length];
 
                     for (int i = 0; i < length; i++)
                     {
-                        binaryReaders[i] = new BinaryReader(File.Open(TempFiles[i], FileMode.Open));
-                        binaryReaders[i].ReadInt32();
-                    }
-                    for (int i = 0; i < length; i++)
-                    {
-                        tempIntArr[i] = binaryReaders[i].ReadInt32();
+                        streamReader[i] = new FileStream(TempFiles[i], FileMode.Open);
+                        reader[i] = new BinaryReader(streamReader[i]);
+                        tempIntArr[i] = reader[i].ReadInt32();
                     }
 
+                    int count = 0;
                     bool next;
                     do
                     {
                         next = false;
+                        minInt = tempIntArr[1];
 
                         for (int i = 0; i < length; i++)
                         {
@@ -81,11 +86,14 @@ namespace ExternalSorter
                             }
                         }
 
+                        writer.Write(minInt);
+                        if (count % FlushSize == 0) writer.Flush();
+
                         int index = Array.IndexOf(tempIntArr, minInt);
 
-                        if (binaryReaders[index].PeekChar() > -1)
+                        if (streamReader[index].Position < streamReader[index].Length) // ошибка!!!
                         {
-                            tempIntArr[index] = binaryReaders[index].ReadInt32();
+                            tempIntArr[index] = reader[index].ReadInt32();
                         }
                         else
                         {
@@ -94,15 +102,15 @@ namespace ExternalSorter
 
                         for (int i = 0; i < length; i++)
                         {
-                            if (binaryReaders[i].PeekChar() > -1) next = true;
+                            if (reader[i].PeekChar() > -1) next = true;
                         }
-
+                        count++;
                     } while (next);
 
                     for (int i = 0; i < length; i++)
                     {
-                        binaryReaders[i].Close();
-                        File.Delete(TempFiles[i]);
+                        reader[i].Close(); // закрытие потоков
+                        File.Delete(TempFiles[i]);  // удаление временных файлов
                     }
                 }
             }

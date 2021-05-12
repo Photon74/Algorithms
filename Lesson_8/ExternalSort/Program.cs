@@ -9,28 +9,42 @@ namespace ExternalSorter
         static void Main(string[] args)
         {
             string path = "test.txt";
-            //List<string> partFiles = new List<string>();
-            int[] vs;  // массив для контроля
-
+            int flushSize = 256;
+            int[] vs;
+            int[] vs1;
 
             if (File.Exists(path))
             {
                 File.Delete(path);
             }
 
-            using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.OpenOrCreate))) // создание файла с массивом
+            using (FileStream streamWriter = new FileStream(path, FileMode.Create))
+            using (BinaryWriter writer = new BinaryWriter(streamWriter)) // создание файла с массивом
             {
-                int[] tempArr = GetRandomArray(5 * (int)FileSize.MByte, 10, 100);
-
+                int[] tempArr = GetRandomArray(5 * (int)FileSize.KByte, 10, 100);
+                int count = 0;
                 for (int i = 0; i < tempArr.Length; i++)
                 {
-                    writer.Write(tempArr[i]); 
+                    writer.Write(tempArr[i]);
+                    if (count % flushSize == 0) writer.Flush();
                 }
                 vs = tempArr;
             }
 
             ExternalSort.IntArrayFile(path);
 
+            using (var streamReader = new FileStream(path, FileMode.Open))
+            using (var reader = new BinaryReader(streamReader)) // создание файла с массивом
+            {
+                int i = 0;
+                int[] tempArr = new int[5 * (int)FileSize.KByte];
+                while (streamReader.Position < streamReader.Length)
+                {
+                    tempArr[i] = reader.ReadInt32();
+                    i++;
+                }
+                vs1 = tempArr;
+            }
             Console.WriteLine("?");
             Console.ReadLine();
         }
