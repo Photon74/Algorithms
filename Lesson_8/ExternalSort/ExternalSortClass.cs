@@ -80,6 +80,11 @@ namespace ExternalSorter
 
                         for (int i = 0; i < length; i++)
                         {
+                            if (streamReader[i].Position < streamReader[i].Length) next = true;
+                        }
+
+                        for (int i = 0; i < length; i++)
+                        {
                             if (tempIntArr[i] < minInt)
                             {
                                 minInt = tempIntArr[i];
@@ -98,11 +103,6 @@ namespace ExternalSorter
                         else
                         {
                             tempIntArr[index] = int.MaxValue;
-                        }
-
-                        for (int i = 0; i < length; i++)
-                        {
-                            if (streamReader[i].Position < streamReader[i].Length) next = true;
                         }
                         count++;
                     } while (next);

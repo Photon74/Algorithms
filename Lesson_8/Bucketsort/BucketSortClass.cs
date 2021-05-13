@@ -6,31 +6,33 @@ namespace BucketSort
 {
     public class BucketSortClass
     {
-        public static int[] BucketSortMethod(int[] a)
+        public static int[] BucketSortMethod(int[] arr)
         {
             List<int>[] buckets = new List<int>[5];
+
+            if (arr == null) throw new ArgumentNullException(nameof(arr));
 
             for (int i = 0; i < buckets.Length; ++i)
                 buckets[i] = new List<int>();
 
-            int minValue = a[0];
-            int maxValue = a[0];
+            int minValue = arr[0];
+            int maxValue = arr[0];
 
-            for (int i = 1; i < a.Length; ++i)
+            for (int i = 1; i < arr.Length; ++i)
             {
-                if (a[i] < minValue)
-                    minValue = a[i];
-                else if (a[i] > maxValue)
-                    maxValue = a[i];
+                if (arr[i] < minValue)
+                    minValue = arr[i];
+                else if (arr[i] > maxValue)
+                    maxValue = arr[i];
             }
 
             double numRange = maxValue - minValue;
 
-            for (int i = 0; i < a.Length; ++i)
+            for (int i = 0; i < arr.Length; ++i)
             {
-                int bucketIndex = (int)Math.Round((a[i] - minValue) / numRange * (buckets.Length - 1));
+                int bucketIndex = (int)Math.Round((arr[i] - minValue) / numRange * (buckets.Length - 1));
 
-                buckets[bucketIndex].Add(a[i]);
+                buckets[bucketIndex].Add(arr[i]);
             }
 
             for (int i = 0; i < buckets.Length; ++i)
@@ -44,10 +46,10 @@ namespace BucketSort
             {
                 for (int j = 0; j < buckets[i].Count; ++j)
                 {
-                    a[index++] = buckets[i][j];
+                    arr[index++] = buckets[i][j];
                 }
             }
-            return a;
+            return arr;
         }
     }
 }
