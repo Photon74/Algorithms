@@ -37,11 +37,14 @@ namespace ExternalSorter
             using (var reader = new BinaryReader(streamReader)) // создание файла с массивом
             {
                 int i = 0;
-                int[] tempArr = new int[5 * (int)FileSize.KByte];
+                int[] tempArr = new int[1280];
                 while (streamReader.Position < streamReader.Length)
                 {
-                    tempArr[i] = reader.ReadInt32();
+                    //for (int i = 0; i < tempArr.Length - 1; i++)
+                    //{
+                        tempArr[i] = reader.ReadInt32();
                     i++;
+                    //}
                 }
                 vs1 = tempArr;
             }

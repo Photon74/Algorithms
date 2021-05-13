@@ -91,7 +91,7 @@ namespace ExternalSorter
 
                         int index = Array.IndexOf(tempIntArr, minInt);
 
-                        if (streamReader[index].Position < streamReader[index].Length) // ошибка!!!
+                        if (streamReader[index].Position < streamReader[index].Length)
                         {
                             tempIntArr[index] = reader[index].ReadInt32();
                         }
@@ -102,7 +102,7 @@ namespace ExternalSorter
 
                         for (int i = 0; i < length; i++)
                         {
-                            if (reader[i].PeekChar() > -1) next = true;
+                            if (streamReader[i].Position < streamReader[i].Length) next = true;
                         }
                         count++;
                     } while (next);
