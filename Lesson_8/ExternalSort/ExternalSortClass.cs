@@ -16,26 +16,26 @@ namespace ExternalSorter
             // разбиение большого файла на малые сортированные файлы
             try
             {
-                using (FileStream streamReader = new FileStream(filePath, FileMode.Open))
-                using (BinaryReader reader = new BinaryReader(streamReader))
+                using (var streamReader = new FileStream(filePath, FileMode.Open))
+                using (var reader = new BinaryReader(streamReader))
                 {
-                    int count = 0;
+                    var count = 0;
                     while (streamReader.Position < streamReader.Length)
                     {
-                        int[] tempArr = new int[(int)FileSize.KByte];
-                        for (int i = 0; i < tempArr.Length; i++)
+                        var tempArr = new int[(int)FileSize.KByte];
+                        for (var i = 0; i < tempArr.Length; i++)
                         {
                             tempArr[i] = reader.ReadInt32();
                         }
                         Array.Sort(tempArr);
 
-                        string tempFileName = Path.GetFileNameWithoutExtension(filePath) + count.ToString() + Path.GetExtension(filePath);
+                        var tempFileName = Path.GetFileNameWithoutExtension(filePath) + count.ToString() + Path.GetExtension(filePath);
                         TempFiles.Add(tempFileName);
 
-                        using (FileStream streamWriter = new FileStream(tempFileName, FileMode.Create))
-                        using (BinaryWriter writer = new BinaryWriter(streamWriter))
+                        using (var streamWriter = new FileStream(tempFileName, FileMode.Create))
+                        using (var writer = new BinaryWriter(streamWriter))
                         {
-                            for (int i = 0; i < tempArr.Length; i++)
+                            for (var i = 0; i < tempArr.Length; i++)
                             {
                                 writer.Write(tempArr[i]);
                                 if (i % FlushSize == 0) writer.Flush();
@@ -55,35 +55,34 @@ namespace ExternalSorter
             // собирание временных файлов в один(имя совпадает с исходным)
             try
             {
-                using (FileStream streamWriter = new FileStream(filePath, FileMode.Create))
-                using (BinaryWriter writer = new BinaryWriter(streamWriter))
+                using (var streamWriter = new FileStream(filePath, FileMode.Create))
+                using (var writer = new BinaryWriter(streamWriter))
                 {
-                    int minInt = int.MaxValue;
-                    int length = TempFiles.Count;
-                    FileStream[] streamReader = new FileStream[length];
-                    BinaryReader[] reader = new BinaryReader[length];
-                    int[] tempIntArr = new int[length];
+                    var length = TempFiles.Count;
+                    var streamReader = new FileStream[length];
+                    var reader = new BinaryReader[length];
+                    var tempIntArr = new int[length];
 
-                    for (int i = 0; i < length; i++)
+                    for (var i = 0; i < length; i++)
                     {
                         streamReader[i] = new FileStream(TempFiles[i], FileMode.Open);
                         reader[i] = new BinaryReader(streamReader[i]);
                         tempIntArr[i] = reader[i].ReadInt32();
                     }
 
-                    int count = 0;
+                    var count = 0;
                     bool next;
                     do
                     {
                         next = false;
-                        minInt = tempIntArr[1];
+                        var minInt = tempIntArr[1];
 
-                        for (int i = 0; i < length; i++)
+                        for (var i = 0; i < length; i++)
                         {
                             if (streamReader[i].Position < streamReader[i].Length) next = true;
                         }
 
-                        for (int i = 0; i < length; i++)
+                        for (var i = 0; i < length; i++)
                         {
                             if (tempIntArr[i] < minInt)
                             {
@@ -94,7 +93,7 @@ namespace ExternalSorter
                         writer.Write(minInt);
                         if (count % FlushSize == 0) writer.Flush();
 
-                        int index = Array.IndexOf(tempIntArr, minInt);
+                        var index = Array.IndexOf(tempIntArr, minInt);
 
                         if (streamReader[index].Position < streamReader[index].Length)
                         {
@@ -107,7 +106,7 @@ namespace ExternalSorter
                         count++;
                     } while (next);
 
-                    for (int i = 0; i < length; i++)
+                    for (var i = 0; i < length; i++)
                     {
                         reader[i].Close(); // закрытие потоков
                         File.Delete(TempFiles[i]);  // удаление временных файлов

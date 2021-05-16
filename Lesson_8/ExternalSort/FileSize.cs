@@ -1,6 +1,6 @@
 ﻿namespace ExternalSorter
 {
-    enum FileSize
+    internal enum FileSize
     {
         KByte = 256,
         MByte = 262144
