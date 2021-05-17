@@ -10,8 +10,14 @@ namespace ExternalSorter
         public static int FlushSize => 256;
         public static List<string> TempFiles { get; private set; }
 
-        public static void IntArrayFile(string filePath)
+        public static void IntArrayFile(string filePath, int tempFilesSizeInBytes = 1024)
         {
+            if (tempFilesSizeInBytes % 4 != 0)
+            {
+                tempFilesSizeInBytes += tempFilesSizeInBytes % 4;
+            }
+            tempFilesSizeInBytes /= 4;
+
             TempFiles = new List<string>();
             // разбиение большого файла на малые сортированные файлы
             try
@@ -22,7 +28,7 @@ namespace ExternalSorter
                     var count = 0;
                     while (streamReader.Position < streamReader.Length)
                     {
-                        var tempArr = new int[(int)FileSize.KByte];
+                        var tempArr = new int[tempFilesSizeInBytes];
                         for (var i = 0; i < tempArr.Length; i++)
                         {
                             tempArr[i] = reader.ReadInt32();
