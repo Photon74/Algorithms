@@ -18,7 +18,7 @@ namespace ExternalSorter
             using (var streamWriter = new FileStream(path, FileMode.Create))
             using (var writer = new BinaryWriter(streamWriter)) // создание файла с массивом
             {
-                var tempArr = GetRandomArray(5 * (int)FileSize.KByte, 10, 100);
+                var tempArr = GetRandomArray(100 * (int)FileSize.KByte, 10, 100);
                 for (var i = 0; i < tempArr.Length; i++)
                 {
                     writer.Write(tempArr[i]);
@@ -27,6 +27,9 @@ namespace ExternalSorter
             }
 
             ExternalSort.IntArrayFile(path);
+
+            Console.WriteLine("\n?");
+            Console.ReadLine();
         }
 
         private static int[] GetRandomArray(int arraySize, int minValue, int maxValue)

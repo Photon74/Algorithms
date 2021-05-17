@@ -8,23 +8,30 @@ namespace ExternalSorter
     public class ExternalSort
     {
         public static int FlushSize => 256;
+        public static int IntSize => 4;
+        public static double IsDone { get; private set; }
         public static List<string> TempFiles { get; private set; }
+
+        private static StringBuilder sb = new StringBuilder();
 
         public static void IntArrayFile(string filePath, int tempFilesSizeInBytes = 1024)
         {
-            if (tempFilesSizeInBytes % 4 != 0)
+            if (tempFilesSizeInBytes % IntSize != 0)
             {
-                tempFilesSizeInBytes += tempFilesSizeInBytes % 4;
+                tempFilesSizeInBytes += tempFilesSizeInBytes % IntSize;
             }
-            tempFilesSizeInBytes /= 4;
+            tempFilesSizeInBytes /= IntSize;
 
             TempFiles = new List<string>();
+
             // разбиение большого файла на малые сортированные файлы
             try
             {
                 using (var streamReader = new FileStream(filePath, FileMode.Open))
                 using (var reader = new BinaryReader(streamReader))
                 {
+                    IsDone = streamReader.Length;
+
                     var count = 0;
                     while (streamReader.Position < streamReader.Length)
                     {
@@ -80,6 +87,7 @@ namespace ExternalSorter
                     bool next;
                     do
                     {
+
                         next = false;
                         var minInt = tempIntArr[1];
 
@@ -109,6 +117,16 @@ namespace ExternalSorter
                         {
                             tempIntArr[index] = int.MaxValue;
                         }
+
+                        if (streamWriter.Position % FlushSize == 0)
+                        {
+                            sb.Clear();
+                            sb.Append(Math.Round(streamWriter.Position / IsDone * 100));
+                            Console.SetCursorPosition(0,0);
+                            Console.CursorVisible = false;
+                            Console.Write("Выполнено " + sb + "%");
+                        }
+
                         count++;
                     } while (next);
 
