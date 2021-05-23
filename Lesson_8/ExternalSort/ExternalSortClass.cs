@@ -12,7 +12,8 @@ namespace ExternalSorter
 
         private int oldPercent;
         private  int percent;
-        public  int Percent
+
+        private int Percent
         {
             get => percent;
             set
@@ -78,7 +79,7 @@ namespace ExternalSorter
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                throw new Exception($"Что-то пошло не так,\n{e.Message}");
             }
 
             File.Delete(filePath);  // удаление исходного файла
@@ -153,7 +154,7 @@ namespace ExternalSorter
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                throw new Exception($"Что-то пошло не так,\n{e.Message}");
             }
         }
     }
