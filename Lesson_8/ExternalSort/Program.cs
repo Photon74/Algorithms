@@ -7,6 +7,7 @@ namespace ExternalSorter
     {
         static void Main(string[] args)
         {
+            ExternalSort sorter = new ExternalSort();
             const string path = "test.txt";
             const int flushSize = 256;
 
@@ -26,7 +27,8 @@ namespace ExternalSorter
                 }
             }
 
-            ExternalSort.IntArrayFile(path);
+            sorter.MyEvent += PrintPercents;
+            sorter.IntArrayFile(path);
 
             Console.WriteLine("\n?");
             Console.ReadLine();
@@ -41,6 +43,13 @@ namespace ExternalSorter
                 randomArray[i] = random.Next(minValue, maxValue);
             }
             return randomArray;
+        }
+
+        private static void PrintPercents(int percent)
+        {
+            Console.CursorVisible = false;
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine($"Выполнено: {percent} %");
         }
     }
 }

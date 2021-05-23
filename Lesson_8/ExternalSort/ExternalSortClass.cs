@@ -2,20 +2,41 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading;
 
 namespace ExternalSorter
 {
+    public delegate void EventDelegate(int p);
     public class ExternalSort
     {
-        public static int FlushSize => 256;
-        public static int IntSize => 4;
-        public static double IsDone { get; private set; }
-        public static List<string> TempFiles { get; private set; }
+        public event EventDelegate MyEvent = null;
 
-        private static StringBuilder sb = new StringBuilder();
-
-        public static void IntArrayFile(string filePath, int tempFilesSizeInBytes = 1024)
+        private int oldPercent;
+        private  int percent;
+        public  int Percent
         {
+            get => percent;
+            set
+            {
+                percent = value;
+                if (oldPercent != percent)
+                {
+                    oldPercent = percent;
+                    if (MyEvent != null)
+                        MyEvent.Invoke(percent);
+                }
+            }
+        }
+        public  int FlushSize => 256;
+        public  int IntSize => 4;
+        public  double IsDone { get; private set; }
+        public  List<string> TempFiles { get; private set; }
+
+        private  StringBuilder sb = new StringBuilder();
+
+        public  void IntArrayFile(string filePath, int tempFilesSizeInBytes = 1024)
+        {
+
             if (tempFilesSizeInBytes % IntSize != 0)
             {
                 tempFilesSizeInBytes += tempFilesSizeInBytes % IntSize;
@@ -118,13 +139,9 @@ namespace ExternalSorter
                             tempIntArr[index] = int.MaxValue;
                         }
 
-                        if (streamWriter.Position % FlushSize == 0)
+                        if (streamWriter.Position % FlushSize == 0) //  Процент выполнения
                         {
-                            sb.Clear();
-                            sb.Append(Math.Round(streamWriter.Position / IsDone * 100));
-                            Console.SetCursorPosition(0,0);
-                            Console.CursorVisible = false;
-                            Console.Write("Выполнено " + sb + "%");
+                            Percent = (int) Math.Round(streamWriter.Position / IsDone * 100);
                         }
 
                         count++;
