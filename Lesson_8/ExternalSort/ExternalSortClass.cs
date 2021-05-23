@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using System.Threading;
 
 namespace ExternalSorter
 {
@@ -31,8 +30,6 @@ namespace ExternalSorter
         public  int IntSize => 4;
         public  double IsDone { get; private set; }
         public  List<string> TempFiles { get; private set; }
-
-        private  StringBuilder sb = new StringBuilder();
 
         public  void IntArrayFile(string filePath, int tempFilesSizeInBytes = 1024)
         {
