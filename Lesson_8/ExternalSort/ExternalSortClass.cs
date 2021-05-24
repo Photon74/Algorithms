@@ -8,7 +8,7 @@ namespace ExternalSorter
     public delegate void EventDelegate(int p);
     public class ExternalSort
     {
-        public event EventDelegate MyEvent = null;
+        public event EventDelegate OnProgressUpdateEvent = null;
 
         private int oldPercent;
         private  int percent;
@@ -22,8 +22,8 @@ namespace ExternalSorter
                 if (oldPercent != percent)
                 {
                     oldPercent = percent;
-                    if (MyEvent != null)
-                        MyEvent.Invoke(percent);
+                    if (OnProgressUpdateEvent != null)
+                        OnProgressUpdateEvent.Invoke(percent);
                 }
             }
         }
